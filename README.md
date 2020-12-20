@@ -1,6 +1,6 @@
-# rust-desktop-template
+# Web Server
 
-![Rust](https://github.com/Manny-coffee-dev/rust-desktop-template/workflows/Rust/badge.svg?branch=development)
+![Rust](https://github.com/Manny-coffee-dev/web-server/workflows/Rust/badge.svg?branch=development)
 
 ## About
 
