@@ -1,7 +1,7 @@
 [package]
-name = "project-name"
+name = "web-server"
 version = "0.0.0"
-authors = ["author <author-email>"]
+authors = ["Manny <manny.cofee-dev@pm.me>"]
 edition = "2018"
 
 [dependencies]
