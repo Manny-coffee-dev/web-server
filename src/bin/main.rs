@@ -23,7 +23,8 @@ fn main() {
 
 fn handle_connection(mut stream: TcpStream) {
     let mut buffer = [0; 1024];
-    stream.read(&mut buffer).unwrap();
+
+    #[allow(clippy::unused_io_amount)] stream.read(&mut buffer).unwrap();
 
     println!("Request: {}", String::from_utf8_lossy(&buffer[..]));
 
@@ -43,6 +44,6 @@ fn handle_connection(mut stream: TcpStream) {
 
     let response = format!("{}{}", status_line, contents);
 
-    stream.write(response.as_bytes()).unwrap();
+    stream.write_all(response.as_bytes()).unwrap();
     stream.flush().unwrap();
 }
