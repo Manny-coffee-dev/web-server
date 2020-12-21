@@ -1,3 +1,4 @@
+#![allow(clippy::unused_io_amount)]
 use std::fs;
 use std::io::prelude::*;
 use std::net::TcpListener;
@@ -24,7 +25,7 @@ fn main() {
 fn handle_connection(mut stream: TcpStream) {
     let mut buffer = [0; 1024];
 
-    #[allow(clippy::unused_io_amount)] stream.read(&mut buffer).unwrap();
+    stream.read(&mut buffer).unwrap();
 
     println!("Request: {}", String::from_utf8_lossy(&buffer[..]));
 
