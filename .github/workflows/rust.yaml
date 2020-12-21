@@ -8,7 +8,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  project-name: 'web-server'
+  project-name: 'main'
 
 jobs:
   test:
@@ -19,7 +19,7 @@ jobs:
       run: curl https://sh.rustup.rs -sSf | sh -s -- -y
     - name: Test
       run: cargo test --verbose
-  
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -35,7 +35,7 @@ jobs:
     - name: Clippy
       run: cargo clippy --verbose
 
-  
+
   check:
     runs-on: ubuntu-latest
     steps:
@@ -46,7 +46,7 @@ jobs:
       run: cargo check --verbose
 
   build-linux:
-    needs: 
+    needs:
       - test
       - lint
       - check
@@ -61,9 +61,14 @@ jobs:
       with:
         name: ${{env.project-name}}-x86_64-unknown-linux-gnu
         path: ./target/release/${{env.project-name}}
-    
+    - name: Publish resources
+      uses: actions/upload-artifact@v2
+      with:
+        name: resources
+        path: ./resources
+
   build-macos:
-    needs: 
+    needs:
       - test
       - lint
       - check
@@ -78,9 +83,14 @@ jobs:
       with:
         name: ${{env.project-name}}-x86_64-apple-darwin
         path: ./target/release/${{env.project-name}}
-  
+    - name: Publish resources
+      uses: actions/upload-artifact@v2
+      with:
+        name: resources
+        path: ./resources
+
   build-windows:
-    needs: 
+    needs:
       - test
       - lint
       - check
@@ -95,3 +105,8 @@ jobs:
       with:
         name: ${{env.project-name}}-x86_64-pc-windows
         path: ./target/release/${{env.project-name}}.exe
+    - name: Publish resources
+      uses: actions/upload-artifact@v2
+      with:
+        name: resources
+        path: ./resources
